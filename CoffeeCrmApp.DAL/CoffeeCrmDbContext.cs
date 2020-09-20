@@ -9,12 +9,8 @@ namespace CoffeeCrmApp.DAL
 {
     public class CoffeeCrmDbContext : IdentityDbContext 
     {
-        public CoffeeCrmDbContext()
-        {
-        }
-        public CoffeeCrmDbContext(DbContextOptions options) : base(options)
-        {
-        }
+        public CoffeeCrmDbContext() { }
+        public CoffeeCrmDbContext(DbContextOptions options) : base(options) { }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerAddress> CustomerAddresses { get; set; }
     }

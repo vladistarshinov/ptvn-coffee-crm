@@ -4,14 +4,14 @@
     "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.WEB\\CoffeeCrmApp.WEB.csproj": {}
   },
   "projects": {
-    "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.WEB\\CoffeeCrmApp.WEB.csproj": {
+    "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.DAL\\CoffeeCrmApp.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.WEB\\CoffeeCrmApp.WEB.csproj",
-        "projectName": "CoffeeCrmApp.WEB",
-        "projectPath": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.WEB\\CoffeeCrmApp.WEB.csproj",
+        "projectUniqueName": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.DAL\\CoffeeCrmApp.DAL.csproj",
+        "projectName": "CoffeeCrmApp.DAL",
+        "projectPath": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.DAL\\CoffeeCrmApp.DAL.csproj",
         "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-        "outputPath": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.WEB\\obj\\",
+        "outputPath": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,109 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.WEB\\CoffeeCrmApp.WEB.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.WEB\\CoffeeCrmApp.WEB.csproj",
+        "projectName": "CoffeeCrmApp.WEB",
+        "projectPath": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.WEB\\CoffeeCrmApp.WEB.csproj",
+        "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.WEB\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.DAL\\CoffeeCrmApp.DAL.csproj": {
+                "projectPath": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.DAL\\CoffeeCrmApp.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
