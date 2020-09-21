@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v3.1": {
       "CoffeeCrmApp.WEB/1.0.0": {
         "dependencies": {
+          "CoffeeCrmApp.BLL": "1.0.0",
           "CoffeeCrmApp.DAL": "1.0.0",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.8",
           "Microsoft.EntityFrameworkCore": "3.1.8",
@@ -894,6 +895,17 @@
         }
       },
       "System.Text.Encodings.Web/4.5.0": {},
+      "CoffeeCrmApp.BLL/1.0.0": {
+        "dependencies": {
+          "CoffeeCrmApp.DAL": "1.0.0"
+        },
+        "runtime": {
+          "CoffeeCrmApp.BLL.dll": {}
+        },
+        "compile": {
+          "CoffeeCrmApp.BLL.dll": {}
+        }
+      },
       "CoffeeCrmApp.DAL/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "2.2.0",
@@ -2953,6 +2965,11 @@
       "sha512": "sha512-Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
       "path": "system.text.encodings.web/4.5.0",
       "hashPath": "system.text.encodings.web.4.5.0.nupkg.sha512"
+    },
+    "CoffeeCrmApp.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "CoffeeCrmApp.DAL/1.0.0": {
       "type": "project",

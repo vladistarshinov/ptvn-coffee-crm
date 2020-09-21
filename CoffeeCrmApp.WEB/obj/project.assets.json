@@ -824,6 +824,19 @@
           "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
         }
       },
+      "CoffeeCrmApp.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "CoffeeCrmApp.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CoffeeCrmApp.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CoffeeCrmApp.BLL.dll": {}
+        }
+      },
       "CoffeeCrmApp.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -2174,6 +2187,11 @@
         "version.txt"
       ]
     },
+    "CoffeeCrmApp.BLL/1.0.0": {
+      "type": "project",
+      "path": "../CoffeeCrmApp.BLL/CoffeeCrmApp.BLL.csproj",
+      "msbuildProject": "../CoffeeCrmApp.BLL/CoffeeCrmApp.BLL.csproj"
+    },
     "CoffeeCrmApp.DAL/1.0.0": {
       "type": "project",
       "path": "../CoffeeCrmApp.DAL/CoffeeCrmApp.DAL.csproj",
@@ -2182,6 +2200,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "CoffeeCrmApp.BLL >= 1.0.0",
       "CoffeeCrmApp.DAL >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 3.1.8",
       "Microsoft.EntityFrameworkCore >= 3.1.8",
@@ -2220,6 +2239,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.BLL\\CoffeeCrmApp.BLL.csproj": {
+              "projectPath": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.BLL\\CoffeeCrmApp.BLL.csproj"
+            },
             "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.DAL\\CoffeeCrmApp.DAL.csproj": {
               "projectPath": "C:\\projects\\CoffeeCrmApp\\CoffeeCrmApp.DAL\\CoffeeCrmApp.DAL.csproj"
             }

@@ -51,3 +51,5 @@ C:\projects\CoffeeCrmApp\CoffeeCrmApp.WEB\bin\Debug\netcoreapp3.1\Newtonsoft.Jso
 C:\projects\CoffeeCrmApp\CoffeeCrmApp.WEB\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\projects\CoffeeCrmApp\CoffeeCrmApp.WEB\bin\Debug\netcoreapp3.1\CoffeeCrmApp.DAL.pdb
 C:\projects\CoffeeCrmApp\CoffeeCrmApp.WEB\obj\Debug\netcoreapp3.1\CoffeeCrmApp.WEB.csproj.CopyComplete
+C:\projects\CoffeeCrmApp\CoffeeCrmApp.WEB\bin\Debug\netcoreapp3.1\CoffeeCrmApp.BLL.dll
+C:\projects\CoffeeCrmApp\CoffeeCrmApp.WEB\bin\Debug\netcoreapp3.1\CoffeeCrmApp.BLL.pdb

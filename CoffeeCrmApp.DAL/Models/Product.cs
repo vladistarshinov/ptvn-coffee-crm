@@ -20,5 +20,10 @@ namespace CoffeeCrmApp.DAL.Models
         public bool IsArchived { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
+
+        //public static implicit operator Product(bool v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

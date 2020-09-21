@@ -3,13 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCrmApp.WEB", "CoffeeCrmApp.WEB\CoffeeCrmApp.WEB.csproj", "{F96A9564-1A3B-4D3D-BD24-F3ED3B89A1BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeCrmApp.WEB", "CoffeeCrmApp.WEB\CoffeeCrmApp.WEB.csproj", "{F96A9564-1A3B-4D3D-BD24-F3ED3B89A1BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCrmApp.DAL", "CoffeeCrmApp.DAL\CoffeeCrmApp.DAL.csproj", "{2BDD5CF2-4C81-48D5-B593-61DA5713BA8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeCrmApp.DAL", "CoffeeCrmApp.DAL\CoffeeCrmApp.DAL.csproj", "{2BDD5CF2-4C81-48D5-B593-61DA5713BA8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCrmApp.BLL", "CoffeeCrmApp.BLL\CoffeeCrmApp.BLL.csproj", "{45155F88-C1CA-41F6-93F7-BFE18A799A5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeCrmApp.BLL", "CoffeeCrmApp.BLL\CoffeeCrmApp.BLL.csproj", "{45155F88-C1CA-41F6-93F7-BFE18A799A5B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2BDD5CF2-4C81-48D5-B593-61DA5713BA8D} = {2BDD5CF2-4C81-48D5-B593-61DA5713BA8D}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCrmApp.Test", "CoffeeCrmApp.Test\CoffeeCrmApp.Test.csproj", "{3D565133-24B1-4138-9D6E-8648C067820B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeCrmApp.Test", "CoffeeCrmApp.Test\CoffeeCrmApp.Test.csproj", "{3D565133-24B1-4138-9D6E-8648C067820B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

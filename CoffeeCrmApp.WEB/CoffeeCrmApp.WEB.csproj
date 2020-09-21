@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoffeeCrmApp.BLL\CoffeeCrmApp.BLL.csproj" />
     <ProjectReference Include="..\CoffeeCrmApp.DAL\CoffeeCrmApp.DAL.csproj" />
   </ItemGroup>
 
