@@ -3,15 +3,17 @@ using System;
 using CoffeeCrmApp.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CoffeeCrmApp.DAL.Migrations
 {
     [DbContext(typeof(CoffeeCrmDbContext))]
-    partial class CoffeeCrmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200921113151_ProductSales")]
+    partial class ProductSales
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

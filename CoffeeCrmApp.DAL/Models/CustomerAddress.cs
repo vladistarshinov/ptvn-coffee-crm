@@ -9,10 +9,10 @@ namespace CoffeeCrmApp.DAL.Models
     {
         public int Id { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(32)]
         public string Country { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(24)]
         public string City { get; set; }
 
         [MaxLength(50)]
