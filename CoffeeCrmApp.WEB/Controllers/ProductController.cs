@@ -20,12 +20,12 @@ namespace CoffeeCrmApp.WEB.Controllers
             _productService = productService;
         }
 
-        [HttpGet("/api/product")]
-        public ActionResult GetProduct()
+        [HttpGet("/api/products")]
+        public ActionResult GetProducts()
         {
             _logger.LogInformation("Загружены все товары");
-            _productService.GetAllProducts();
-            return Ok("");
+            var products = _productService.GetAllProducts();
+            return Ok(products);
         }
     }
 }
