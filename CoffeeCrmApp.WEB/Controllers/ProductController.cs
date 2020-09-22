@@ -1,4 +1,5 @@
 ﻿using CoffeeCrmApp.BLL.Interfaces.Product;
+using CoffeeCrmApp.WEB.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -25,7 +26,9 @@ namespace CoffeeCrmApp.WEB.Controllers
         {
             _logger.LogInformation("Загружены все товары");
             var products = _productService.GetAllProducts();
-            return Ok(products);
+            var productViewModels = products
+                .Select(product => ProductMapper.SerializeProductViewModel(product));
+            return Ok(productViewModels);
         }
     }
 }
