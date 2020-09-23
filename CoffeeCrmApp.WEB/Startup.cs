@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoffeeCrmApp.BLL.Interfaces;
 using CoffeeCrmApp.BLL.Interfaces.Product;
 using CoffeeCrmApp.BLL.Services;
 using CoffeeCrmApp.DAL;
@@ -39,6 +40,9 @@ namespace CoffeeCrmApp.WEB
             );
 
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IInventoryService, InventoryService>();
+            services.AddTransient<IOrderService, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

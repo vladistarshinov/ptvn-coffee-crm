@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeCrmApp.WEB.Serialization
 {
-    public class ProductMapper
+    public static class ProductMapper
     {
         /// <summary>
         /// Передает Product data model в Product view model
