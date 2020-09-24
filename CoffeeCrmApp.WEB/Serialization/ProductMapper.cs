@@ -8,11 +8,6 @@ namespace CoffeeCrmApp.WEB.Serialization
 {
     public static class ProductMapper
     {
-        /// <summary>
-        /// Передает Product data model в Product view model
-        /// </summary>
-        /// <param name="product"></param>
-        /// <returns></returns>
         public static ProductViewModel SerializeProductViewModel(DAL.Models.Product product)
         {
             return new ProductViewModel

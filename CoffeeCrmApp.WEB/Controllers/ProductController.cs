@@ -24,11 +24,19 @@ namespace CoffeeCrmApp.WEB.Controllers
         [HttpGet("/api/products")]
         public ActionResult GetProducts()
         {
-            _logger.LogInformation("Загружены все товары");
+            _logger.LogInformation("Загрузка всех товаров");
             var products = _productService.GetAllProducts();
             var productViewModels = products
                 .Select(product => ProductMapper.SerializeProductViewModel(product));
             return Ok(productViewModels);
+        }
+
+        [HttpPatch("/api/product/{id}")]
+        public ActionResult ArchiveProduct(int id)
+        {
+            _logger.LogInformation("Архивирование продукта");
+            var archiveResult = _productService.ArchiveProduct(id);
+            return Ok(archiveResult);
         }
     }
 }
