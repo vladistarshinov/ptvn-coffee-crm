@@ -27,12 +27,29 @@ namespace CoffeeCrmApp.WEB.Controllers
             _orderService = orderService;
         }
 
+        [HttpGet("/api/orders")]
+        public ActionResult GetOrders()
+        {
+            var orders = _orderService.GetAllOrders();
+            var ordersList = OrderMapper.SerializeOrdersViewModel(orders);
+            return Ok(ordersList);  
+        }
+
         [HttpPost("/api/order")]
         public ActionResult GenerateNewOrder ([FromBody] InvoiceViewModel invoice)
         {
             _logger.LogInformation("Создание нового заказа");
             var order = OrderMapper.SerializeInvoiceToOrder(invoice);
             order.Customer = _customerService.GetCustomerById(invoice.CustomerId);
+            _orderService.CreateInvoiceForOrder(order);
+            return Ok();
+        }
+
+        [HttpPatch("/api/order/complete/{id}")]
+        public ActionResult GetCompleteOrder(int id)
+        {
+            _logger.LogInformation($"Cтатус заказа {id} - оплачено");
+            _orderService.SuccessOrderStatus(id);
             return Ok();
         }
     }

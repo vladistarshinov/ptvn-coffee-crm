@@ -19,28 +19,6 @@ namespace CoffeeCrmApp.BLL.Services
         }
 
         /// <summary>
-        /// Возвращает список всех покупателей, имеющихся в БД
-        /// </summary>
-        /// <returns>List<Customer></returns>
-        public List<Customer> GetAllCustomers()
-        {
-            return _db.Customers
-                .Include(customer => customer.PrimaryAddress)
-                .OrderBy(customer => customer.LastName)
-                .ToList();
-        }
-
-        /// <summary>
-        /// Выводит покупателя по Id
-        /// </summary>
-        /// <param name="id">int customer primary key</param>
-        /// <returns>Customer</returns>
-        public Customer GetCustomerById(int id)
-        {
-            return _db.Customers.Find(id);
-        }
-
-        /// <summary>
         /// Добавляет нового покупателя в БД
         /// </summary>
         /// <param name="customer">Customer instance</param>
@@ -66,10 +44,32 @@ namespace CoffeeCrmApp.BLL.Services
                 {
                     IsSuccess = false,
                     Data = customer,
-                    Message = e.StackTrace,
+                    Message = e.StackTrace, 
                     Time = DateTime.UtcNow
                 };
             }
+        }
+
+        /// <summary>
+        /// Возвращает список всех покупателей, имеющихся в БД
+        /// </summary>
+        /// <returns>List<Customer></returns>
+        public List<Customer> GetAllCustomers()
+        {
+            return _db.Customers
+                .Include(customer => customer.PrimaryAddress)
+                .OrderBy(customer => customer.LastName)
+                .ToList();
+        }
+
+        /// <summary>
+        /// Выводит покупателя по Id
+        /// </summary>
+        /// <param name="id">int customer primary key</param>
+        /// <returns>Customer</returns>
+        public Customer GetCustomerById(int id)
+        {
+            return _db.Customers.Find(id);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace CoffeeCrmApp.BLL.Services
         /// </summary>
         /// <param name="id">int customer primary key</param>
         /// <returns>ResponseService<bool></returns>
-        public ResponseService<bool> DeleteProduct(int id)
+        public ResponseService<bool> DeleteCustomer(int id)
         {
             var customer = _db.Customers.Find(id);
 

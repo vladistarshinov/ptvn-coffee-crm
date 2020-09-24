@@ -7,8 +7,9 @@ namespace CoffeeCrmApp.WEB.ViewModels
     public class CustomerViewModel
     {
         public int Id { get; set; }
-        [MaxLength(32)] public string FirstName { get; set; }
-        [MaxLength(32)] public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public CustomerAddressViewModel PrimaryAddress { get; set; }
@@ -21,5 +22,8 @@ namespace CoffeeCrmApp.WEB.ViewModels
         [MaxLength(50)] public string Address1 { get; set; }
         [MaxLength(50)] public string Address2 { get; set; }
         [MaxLength(50)] public string Email { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
+
     }
 }

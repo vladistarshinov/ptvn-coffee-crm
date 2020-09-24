@@ -1,4 +1,5 @@
-﻿using CoffeeCrmApp.WEB.ViewModels;
+﻿using CoffeeCrmApp.DAL.Models;
+using CoffeeCrmApp.WEB.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace CoffeeCrmApp.WEB.Serialization
 {
     public static class ProductMapper
     {
-        public static ProductViewModel SerializeProductViewModel(DAL.Models.Product product)
+        public static ProductViewModel SerializeProductViewModel(Product product)
         {
             return new ProductViewModel
             {
@@ -27,9 +28,9 @@ namespace CoffeeCrmApp.WEB.Serialization
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public static DAL.Models.Product SerializeProductViewModel(ProductViewModel product)
+        public static Product SerializeProductViewModel(ProductViewModel product)
         {
-            return new DAL.Models.Product
+            return new Product
             {
                 Id = product.Id,
                 Name = product.Name,

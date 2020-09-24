@@ -11,12 +11,15 @@ namespace CoffeeCrmApp.WEB.Serialization
     {
         public static CustomerViewModel SerializeCustomerViewModel (Customer customer)
         {
+
             return new CustomerViewModel
             {
                 Id = customer.Id,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
+                Phone = customer.Phone,
                 PrimaryAddress = CustomerAddressMapper(customer.PrimaryAddress),
+                //PrimaryAddress = address,
                 CreatedOn = customer.CreatedOn,
                 UpdatedOn = customer.UpdatedOn
             };
@@ -28,6 +31,7 @@ namespace CoffeeCrmApp.WEB.Serialization
             {
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
+                Phone = customer.Phone,
                 PrimaryAddress = CustomerAddressMapper(customer.PrimaryAddress),
                 CreatedOn = customer.CreatedOn,
                 UpdatedOn = customer.UpdatedOn
@@ -38,11 +42,14 @@ namespace CoffeeCrmApp.WEB.Serialization
         {
             return new CustomerAddressViewModel
             {
+                Id = address.Id,
                 Country = address.Country,
                 City = address.City,
                 Address1 = address.Address1,
                 Address2 = address.Address2,
                 Email = address.Email,
+                CreatedOn = DateTime.UtcNow,
+                UpdatedOn = DateTime.UtcNow,
             };
         }
 
@@ -55,6 +62,8 @@ namespace CoffeeCrmApp.WEB.Serialization
                 Address1 = address.Address1,
                 Address2 = address.Address2,
                 Email = address.Email,
+                CreatedOn = DateTime.UtcNow,
+                UpdatedOn = DateTime.UtcNow,
             };
         }
     }
