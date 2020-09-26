@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    
+    <div class="article">
+      <h2>Инвентарь</h2>
+    </div>
   </div>
 </template>
 
@@ -8,16 +10,11 @@
 // @ is an alias to /src
 
 export default {
-  name: "Home",
+  name: "Inventory",
   components: {}
 };
 </script>
 
 <style lang="scss">
-  img {
-    margin-top: 20px;
-    margin-left: 50px;
-    width: 120px;
-    height: 70px;
-  }
+  
 </style>

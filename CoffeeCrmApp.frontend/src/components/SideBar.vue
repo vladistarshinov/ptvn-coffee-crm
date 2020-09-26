@@ -6,11 +6,8 @@
             <h2 class="logo"> 
                 <img alt="Vue logo" src="../assets/logo.png" />
             </h2>
-            <ul>
-                <li><a href="#1">Один</a></li>
-                <li><a href="#2">Два</a></li>
-                <li><a href="#3">Три</a></li>
-                <li><a href="#4">Четыре</a></li>
+            <ul v-for="item in menuItem" :key="item.id">
+                <li><router-link :to="item.url">{{ item.title }}</router-link></li>
             </ul>
         </nav>
     </div>
@@ -21,7 +18,30 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({
   name: "SideBar"
 })
-  export default class SideBar extends Vue {}
+  export default class SideBar extends Vue {
+  menuItem = [
+    {
+      id: 1,
+      title: "Инвентарь",
+      url: "/inventory"
+    },
+    {
+      id: 2,
+      title: "Покупатели",
+      url: "/customers"
+    },
+    {
+      id: 3,
+      title: "Чек",
+      url: "/invoice"
+    },
+    {
+      id: 4,
+      title: "Заказы",
+      url: "/orders"
+    }
+]
+}
 </script>
 
 <style lang="scss">

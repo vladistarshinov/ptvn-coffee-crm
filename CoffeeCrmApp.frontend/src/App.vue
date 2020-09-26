@@ -30,6 +30,19 @@ export default class App extends Vue {}
     color: #2c3e50;
     display: flex;
 
+    &-content {
+      padding-left: 330px;
+      width: 90%;
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    .app {
+      &-content {
+      padding-left: 50px;
+      width: 90%;
+    }
+    }
   }
 
 </style>

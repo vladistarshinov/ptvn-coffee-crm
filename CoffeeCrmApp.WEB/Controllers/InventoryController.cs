@@ -40,5 +40,18 @@ namespace CoffeeCrmApp.WEB.Controllers
 
             return Ok(inventory);
         }
+
+        [HttpPatch("/api/inventory")]
+        public ActionResult UpdateInventory ([FromBody] ShipmentViewModel shipment)
+        {
+            _logger.LogInformation("Изменение количества товара с Id " +
+                                   $"{shipment.ProductId} - " +
+                                   $"{shipment.SettingQuantities}");
+
+            var id = shipment.ProductId;
+            var settingQuantities = shipment.SettingQuantities;
+            var inventory = _inventoryService.UpdateQuantities(id, settingQuantities);
+            return Ok(inventory);
+        }
     }
 }

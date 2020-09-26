@@ -5,10 +5,10 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
-    name: "Home",
+    path: "/inventory",
+    name: "Inventory",
     component: () =>
-      import(/* webpackChunkName: "home" */ "../views/Home.vue")
+      import(/* webpackChunkName: "home" */ "../views/Inventory.vue")
   }
 ];
 
