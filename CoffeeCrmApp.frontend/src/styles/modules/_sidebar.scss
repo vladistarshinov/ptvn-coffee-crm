@@ -1,8 +1,8 @@
 @import "./global.scss";
 
 .nav {
-    width: 320px;
-    min-width: 320px;
+    width: $menu-width;
+    min-width: $menu-width;
     height: 100%;
     position: fixed;
     top: 0;
@@ -13,7 +13,7 @@
     -webkit-transition: left 0.3s;
     -moz-transition: left 0.3s;
     transition: left 0.3s;
-    background: #442d25;
+    background: $coffee-color;
     opacity: 1;
     z-index: 2000;
 }
@@ -26,7 +26,7 @@
 .nav-toggle {
     position: absolute;
     display: none;
-    left: 320px;
+    left: $menu-width;
     top: 1em;
     padding: 0.5em;
     background: inherit;
@@ -103,9 +103,9 @@
 */
 
 [id='nav-toggle']:checked ~ main > article {
-    -webkit-transform: translateX(320px);
-    -moz-transform: translateX(320px);
-    transform: translateX(320px);
+    -webkit-transform: translateX($menu-width);
+    -moz-transform: translateX($menu-width);
+    transform: translateX($menu-width);
 }
 
 
