@@ -102,7 +102,7 @@
  * фишка необязательная, на любителя
 */
 
-[id='nav-toggle']:checked ~ main > article {
+[id='nav-toggle']:checked ~ inventory > article {
     -webkit-transform: translateX($menu-width);
     -moz-transform: translateX($menu-width);
     transform: translateX($menu-width);

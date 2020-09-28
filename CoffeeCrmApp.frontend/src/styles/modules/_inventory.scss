@@ -5,6 +5,27 @@
     text-align: center;
 }
 
+.btn {
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $coffee-color;
+    background-color: transparent;
+    -webkit-transition: background-color 500ms ease;
+    transition: background-color 500ms ease;
+    font-size: 17px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $coffee-color;
+        color: #fff;
+    }
+}
+
 .table {
     width: 100%;
     max-width: 100%;
@@ -32,4 +53,32 @@ th {
 td {
     padding: 1.2rem;
     text-align: center;
+}
+
+.body__element:nth-last-child(1) {
+    margin-top: 20px;
+}
+
+.body__select {
+    display: inline-flex;
+    margin-left: 20px;
+    width: 50%; /* от ширины блока div */
+    padding: .25rem 2.5rem .25rem 1rem;/* отступы от текста до рамки */
+    background: none; /* убираем фон */
+    border: 1px solid #ccc; /* рамка */
+    border-radius: 3px;/* скругление полей формы */
+    font-family: inherit;/* наследует от родителя */
+    font-size: 1rem;
+    color: #444;
+}
+
+.body__input {
+    display: inline-flex;
+    width: 20%;
+    margin-left: 20px;
+    padding: .25rem 0.5rem .25rem 1rem;
+    border: 1px solid #ccc; /* рамка */
+    border-radius: 3px;/* скругление полей формы */
+    font-size: 1rem;
+    color: #444;
 }
