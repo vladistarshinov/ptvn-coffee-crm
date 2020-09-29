@@ -22,104 +22,35 @@
       </button>
     </div>
 
-    <Modal v-if="isShowNewProductModal">
-      <template v-slot:header>
-        Добавить новый продукт
-      </template>
-      <template v-slot:body>
-        <ul class="newProduct">
-          <li>
-            <label for="productName">Название</label>
-            <input type="text" id="productName" v-model="newProduct.name">
-          </li>
-          <li>
-            <label for="productDescription">Описание</label>
-            <input type="text" id="productDescription" v-model="newProduct.description">
-          </li>
-          <li>
-            <label for="productPrice">Цена за шт.</label>
-            <input type="number" id="productPrice" v-model="newProduct.price">
-          </li>
-          <li>
-            <label for="isTaxable">Товар облагается налогом?</label>
-            <input type="checkbox" id="isTaxable" v-model="newProduct.isTaxable">
-          </li>
-        </ul>
-      </template>
-      <template v-slot:footer>
-        <button class="btn" type="button" @click.prevent="saveNewProduct">
-          Добавить
-        </button>
-        <button
-          class="btn"
-          type="button"
-          @click.prevent="isShowNewProductModal = false"
-        >
-          Закрыть
-        </button>
-      </template>
-    </Modal>
+    <NewProductModal 
+      v-if="isShowNewProductModal"
+      :inventory = inventory
+      @add:newProduct="addNewProduct"
+      @close="isShowNewProductModal = false" 
+    />
 
-    <Modal v-if="isShowShipmentModal" :inventory="inventory">
-      <template v-slot:header>
-        Прием чека
-      </template>
-      <template v-slot:body>
-        <ul class="shipmentProducts">
-          <li>
-            <label for="product">Товар</label>
-            <select
-              class="shipmentItems"
-              v-model="selectedProduct"
-              id="product"
-            >
-              <option disabled value="">Выберите из списка ниже...</option>
-              <option
-                v-for="item in inventory"
-                :key="item.product.id"
-                :value="item"
-              >
-                {{ item.product.name }}
-              </option>
-            </select>
-          </li>
-          <li>
-            <label for="quantityReceived">Получено</label>
-            <input
-              type="number"
-              id="quantityReceived"
-              v-model="quantityReceived"
-            />
-          </li>
-        </ul>
-      </template>
-      <template v-slot:footer>
-        <button class="btn" type="button" @click.prevent="saveShipment">
-          Сохранить
-        </button>
-        <button
-          class="btn"
-          type="button"
-          @click.prevent="isShowShipmentModal = false"
-        >
-          Закрыть
-        </button>
-      </template>
-    </Modal>
+    <ShipmentModal 
+      v-if="isShowShipmentModal" 
+      :inventory = inventory 
+      @save:shipment="saveShipment"
+      @close="isShowShipmentModal = false" 
+    />
+
     <InventoryList :inventory="inventory" />
+
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { IProduct, IProductInventory } from "@/types/Product";
-import Modal from "@/components/Modal.vue";
+import NewProductModal from "@/components/NewProductModal.vue";
 import ShipmentModal from "@/components/ShipmentModal.vue";
 import InventoryList from "@/components/InventoryList.vue";
 
 @Component({
   name: "Inventory",
-  components: { Modal, InventoryList }
+  components: { ShipmentModal, NewProductModal, InventoryList }
 })
 export default class Inventory extends Vue {
   isShowNewProductModal: boolean = false;
@@ -158,28 +89,15 @@ export default class Inventory extends Vue {
     }
   ];
 
-  newProduct: IProduct = {
-    id: 0,
-    name: "",
-    description: "",
-    price: 0,
-    isTaxable: false,
-    isArchived: false,
-    createdOn: new Date(),
-    updatedOn: new Date()
-  };
+  saveShipment(selectedProduct : IProduct, quantityReceived : number) {
+    console.log(selectedProduct);
+    console.log("quantityReceived: ", quantityReceived)
+    
+  }
 
-  selectedProduct: IProduct = {
-    id: 0,
-    name: "",
-    description: "",
-    price: 0,
-    isTaxable: false,
-    isArchived: false,
-    createdOn: new Date(),
-    updatedOn: new Date()
-  };
+  addNewProduct(newProduct : IProduct) {
+    console.log(newProduct);
+  }
 
-  quantityReceived: number = 0;
 }
 </script>

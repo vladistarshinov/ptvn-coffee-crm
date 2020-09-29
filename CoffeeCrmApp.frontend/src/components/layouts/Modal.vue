@@ -22,11 +22,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import Vue from "vue";
+import Component from "vue-class-component";
 @Component({
-  name: "NewProductModal"
+  name: "Modal",
+  components: {}
 })
-export default class NewProductModal extends Vue {
+export default class Modal extends Vue {
   close() {
     this.$emit("close");
   }
