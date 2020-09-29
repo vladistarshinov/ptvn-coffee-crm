@@ -5,12 +5,12 @@
       <img
         class="title-separator"
         src="../assets/title-separator.png"
-        alt="разделитель"
+        alt="Разделитель"
       />
     </div>
 
     <div class="inventory-actions">
-      <button class="btn" @click.prevent="showNewProductModal" type="button">
+      <button class="btn" @click.prevent="isShowNewProductModal = true" type="button">
         Добавить
       </button>
       <button
@@ -22,37 +22,76 @@
       </button>
     </div>
 
+    <Modal v-if="isShowNewProductModal">
+      <template v-slot:header>
+        Добавить новый продукт
+      </template>
+      <template v-slot:body>
+        <ul class="newProduct">
+          <li>
+            <label for="productName">Название</label>
+            <input type="text" id="productName" v-model="newProduct.name">
+          </li>
+          <li>
+            <label for="productDescription">Описание</label>
+            <input type="text" id="productDescription" v-model="newProduct.description">
+          </li>
+          <li>
+            <label for="productPrice">Цена за шт.</label>
+            <input type="number" id="productPrice" v-model="newProduct.price">
+          </li>
+          <li>
+            <label for="isTaxable">Товар облагается налогом?</label>
+            <input type="checkbox" id="isTaxable" v-model="newProduct.isTaxable">
+          </li>
+        </ul>
+      </template>
+      <template v-slot:footer>
+        <button class="btn" type="button" @click.prevent="saveNewProduct">
+          Добавить
+        </button>
+        <button
+          class="btn"
+          type="button"
+          @click.prevent="isShowNewProductModal = false"
+        >
+          Закрыть
+        </button>
+      </template>
+    </Modal>
+
     <Modal v-if="isShowShipmentModal" :inventory="inventory">
       <template v-slot:header>
         Прием чека
       </template>
       <template v-slot:body>
-        <div class="body__element">
-          <label class="body__label" for="product">Товар</label>
-          <select
-            class="body__select shipmentItems"
-            v-model="selectedProduct"
-            id="product"
-          >
-            <option disabled value="">Выберите из списка ниже...</option>
-            <option
-              v-for="item in inventory"
-              :key="item.product.id"
-              :value="item"
+        <ul class="shipmentProducts">
+          <li>
+            <label for="product">Товар</label>
+            <select
+              class="shipmentItems"
+              v-model="selectedProduct"
+              id="product"
             >
-              {{ item.product.name }}
-            </option>
-          </select>
-        </div>
-        <div class="body__element">
-          <label class="body__label" for="quantityReceived">Получено:</label>
-          <input
-            type="number"
-            class="body__input"
-            id="quantityReceived"
-            v-model="quantityReceived"
-          />
-        </div>
+              <option disabled value="">Выберите из списка ниже...</option>
+              <option
+                v-for="item in inventory"
+                :key="item.product.id"
+                :value="item"
+              >
+                {{ item.product.name }}
+              </option>
+            </select>
+          </li>
+          <li>
+            <label for="quantityReceived">Получено</label>
+            <input
+              type="number"
+              id="quantityReceived"
+              v-model="quantityReceived"
+            />
+          </li>
+        </ul>
       </template>
       <template v-slot:footer>
         <button class="btn" type="button" @click.prevent="saveShipment">
@@ -80,7 +119,7 @@ import InventoryList from "@/components/InventoryList.vue";
 
 @Component({
   name: "Inventory",
-  components: { Modal, InventoryList },
+  components: { Modal, InventoryList }
 })
 export default class Inventory extends Vue {
   isShowNewProductModal: boolean = false;
@@ -97,10 +136,10 @@ export default class Inventory extends Vue {
         isTaxable: true,
         isArchived: false,
         createdOn: new Date(),
-        updatedOn: new Date(),
+        updatedOn: new Date()
       },
       quantityOnHand: 100,
-      idealQuantity: 100,
+      idealQuantity: 100
     },
     {
       id: 2,
@@ -112,12 +151,23 @@ export default class Inventory extends Vue {
         isTaxable: true,
         isArchived: false,
         createdOn: new Date(),
-        updatedOn: new Date(),
+        updatedOn: new Date()
       },
       quantityOnHand: 50,
-      idealQuantity: 120,
-    },
+      idealQuantity: 120
+    }
   ];
+
+  newProduct: IProduct = {
+    id: 0,
+    name: "",
+    description: "",
+    price: 0,
+    isTaxable: false,
+    isArchived: false,
+    createdOn: new Date(),
+    updatedOn: new Date()
+  };
 
   selectedProduct: IProduct = {
     id: 0,
@@ -127,11 +177,9 @@ export default class Inventory extends Vue {
     isTaxable: false,
     isArchived: false,
     createdOn: new Date(),
-    updatedOn: new Date(),
+    updatedOn: new Date()
   };
 
   quantityReceived: number = 0;
 }
 </script>
-
-<style lang="scss"></style>

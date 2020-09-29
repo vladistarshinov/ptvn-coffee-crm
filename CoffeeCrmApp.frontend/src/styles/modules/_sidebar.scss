@@ -333,7 +333,7 @@ body {
     .nav h2 {
         width: 90%;
         padding: 0;
-        margin: 10px 0;
+        margin: 10px 40px;
         text-align: center;
         text-shadow: rgba(255, 255, 255, .1) -1px -1px 1px, rgba(0, 0, 0, .5) 1px 1px 1px;
         font-size: 1.3em;
@@ -355,10 +355,10 @@ body {
 
     [id='nav-toggle']:checked ~ .nav h2 {
         opacity: 1;
-        transform: scale(1, 1);
-        -ms-transform: scale(1, 1);
-        -moz-transform: scale(1, 1);
-        -webkit-transform: scale(1, 1);
+        transform: scale(0.5, 0.5);
+        -ms-transform: scale(0.5, 0.5);
+        -moz-transform: scale(0.5, 0.5);
+        -webkit-transform: scale(0.5, 0.5);
     }
 
     .nav > ul > li {
