@@ -1,0 +1,67 @@
+@import "./global.scss";
+
+.article {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+}
+
+tr {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    transition: background-color .3s;
+
+    &:hover {
+        background-color: #eeeded;
+        transition: background-color .3s;
+    }
+}
+
+th {
+    background-color: #f5f5f5;
+    padding: 1.2rem;
+    border-bottom: 2px solid $coffee-color;
+}
+
+td {
+    padding: 1.2rem;
+    text-align: center;
+}
+
+.shipmentProducts,
+.newProduct {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  input[type="text"], input[type="number"], select {
+    width: 100%;
+    height: 1.8rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.3rem;
+    padding: .25rem 0.5rem .25rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1rem;
+    color: #444;
+  }
+
+  input[type="checkbox"] {
+    display: inline-flex;
+    border: 1px solid #f00;
+    background: #444;
+    height: 0.8rem;
+}
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+}
