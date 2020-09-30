@@ -35,7 +35,7 @@ namespace CoffeeCrmApp.WEB.Controllers
                     IdealQuantity = i.IdealQuantity,
                     Product = ProductMapper.SerializeProductViewModel(i.Product)
                 })
-                .OrderBy(inv => inv.Product.Name)
+                .OrderByDescending(inv => inv.Product.Id)
                 .ToList();
 
             return Ok(inventory);

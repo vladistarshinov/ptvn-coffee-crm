@@ -36,8 +36,8 @@ export default class SideBar extends Vue {
     },
     {
       id: 3,
-      title: "Чек",
-      url: "/invoice"
+      title: "Расчетка",
+      url: "/invoice/new"
     },
     {
       id: 4,

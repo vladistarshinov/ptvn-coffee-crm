@@ -51,47 +51,18 @@ import { IShipment } from "@/types/Shipment";
 import NewProductModal from "@/components/NewProductModal.vue";
 import ShipmentModal from "@/components/ShipmentModal.vue";
 import InventoryList from "@/components/InventoryList.vue";
+import { InventoryService } from '@/services/InventoryService';
 
 @Component({
   name: "Inventory",
   components: { ShipmentModal, NewProductModal, InventoryList }
 })
 export default class Inventory extends Vue {
+  inventoryService = new InventoryService();
   isShowNewProductModal: boolean = false;
   isShowShipmentModal: boolean = false;
 
-  inventory: IProductInventory[] = [
-    {
-      id: 1,
-      product: {
-        id: 1,
-        name: "Продукт",
-        description: "Хороший продукт",
-        price: 100,
-        isTaxable: true,
-        isArchived: false,
-        createdOn: new Date(),
-        updatedOn: new Date()
-      },
-      quantityOnHand: 100,
-      idealQuantity: 100
-    },
-    {
-      id: 2,
-      product: {
-        id: 2,
-        name: "Еще Продукт",
-        description: "Хороший продукт",
-        price: 150,
-        isTaxable: true,
-        isArchived: false,
-        createdOn: new Date(),
-        updatedOn: new Date()
-      },
-      quantityOnHand: 50,
-      idealQuantity: 120
-    }
-  ];
+  inventory: IProductInventory[] = [];
 
   saveNewShipment(shipment: IShipment) {
     console.log(shipment);
@@ -99,6 +70,16 @@ export default class Inventory extends Vue {
 
   addNewProduct(newProduct: IProduct) {
     console.log(newProduct);
+  }
+
+  async initializeData() {
+    this.inventory = await this.inventoryService.getInventory();
+    console.log(this.inventory)
+    
+  }
+
+  async created() {
+    await this.initializeData();
   }
 }
 </script>
