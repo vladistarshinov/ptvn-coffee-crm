@@ -64,22 +64,24 @@ export default class Inventory extends Vue {
 
   inventory: IProductInventory[] = [];
 
-  saveNewShipment(shipment: IShipment) {
-    console.log(shipment);
+  async saveNewShipment(shipment: IShipment) {
+    await this.inventoryService.updateInventoryQuantity(shipment);
+    this.isShowShipmentModal = false;
+    await this.getInventoryInfo();
   }
 
   addNewProduct(newProduct: IProduct) {
     console.log(newProduct);
   }
 
-  async initializeData() {
+  async getInventoryInfo() {
     this.inventory = await this.inventoryService.getInventory();
     console.log(this.inventory)
     
   }
 
   async created() {
-    await this.initializeData();
+    await this.getInventoryInfo();
   }
 }
 </script>
