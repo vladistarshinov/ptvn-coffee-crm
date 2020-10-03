@@ -38,6 +38,9 @@ namespace CoffeeCrmApp.WEB.Controllers
         [HttpPost("/api/order")]
         public ActionResult GenerateNewOrder ([FromBody] InvoiceViewModel invoice)
         {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
             _logger.LogInformation("Создание нового заказа");
             var order = OrderMapper.SerializeInvoiceToOrder(invoice);
             order.Customer = _customerService.GetCustomerById(invoice.CustomerId);

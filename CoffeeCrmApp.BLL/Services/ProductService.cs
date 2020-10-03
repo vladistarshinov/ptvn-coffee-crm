@@ -42,7 +42,7 @@ namespace CoffeeCrmApp.BLL.Services
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ResponseService<Product> CreateProduct(Product product)
+        public ResponseService<Product> CreateNewProduct(Product product)
         {
             try
             {

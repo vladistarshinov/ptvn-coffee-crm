@@ -1,5 +1,6 @@
 ﻿using CoffeeCrmApp.BLL.Interfaces.Product;
 using CoffeeCrmApp.WEB.Serialization;
+using CoffeeCrmApp.WEB.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -26,9 +27,21 @@ namespace CoffeeCrmApp.WEB.Controllers
         {
             _logger.LogInformation("Загрузка всех товаров");
             var products = _productService.GetAllProducts();
-            var productViewModels = products
+            var productData = products
                 .Select(product => ProductMapper.SerializeProductViewModel(product));
-            return Ok(productViewModels);
+            return Ok(productData);
+        }
+
+        [HttpPost("/api/product")]
+        public ActionResult AddNewProduct([FromBody] ProductViewModel product) 
+        {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+            _logger.LogInformation("Добавление продукта");
+            var newProduct = ProductMapper.SerializeProductViewModel(product);
+            var newProductData = _productService.CreateNewProduct(newProduct);
+            return Ok(newProductData);
         }
 
         [HttpPatch("/api/product/{id}")]

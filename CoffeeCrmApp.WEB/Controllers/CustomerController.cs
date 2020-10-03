@@ -45,6 +45,9 @@ namespace CoffeeCrmApp.WEB.Controllers
         [HttpPost("/api/customer")]
         public ActionResult CreateNewCustomer([FromBody] CustomerViewModel customer)
         {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
             _logger.LogInformation("Cоздание нового клиента");
 
             customer.CreatedOn = DateTime.UtcNow;

@@ -44,6 +44,9 @@ namespace CoffeeCrmApp.WEB.Controllers
         [HttpPatch("/api/inventory")]
         public ActionResult UpdateInventory ([FromBody] ShipmentViewModel shipment)
         {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
             _logger.LogInformation("Изменение количества товара с Id " +
                                    $"{shipment.ProductId} - " +
                                    $"{shipment.SettingQuantities}");

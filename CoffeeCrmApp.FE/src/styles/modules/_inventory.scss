@@ -65,3 +65,15 @@ td {
     margin-bottom: 0.3rem;
   }
 }
+
+.inventory-actions {
+  display: flex;
+  margin-bottom: 0.8rem;
+}
+
+.product-archive {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: $red;
+}

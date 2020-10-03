@@ -40,7 +40,10 @@
       @close="isShowShipmentModal = false"
     />
 
-    <InventoryList :inventory="inventory" />
+    <InventoryList 
+      :inventory="inventory" 
+      @archive="archiveProduct"
+    />
   </div>
 </template>
 
@@ -52,6 +55,7 @@ import NewProductModal from "@/components/NewProductModal.vue";
 import ShipmentModal from "@/components/ShipmentModal.vue";
 import InventoryList from "@/components/InventoryList.vue";
 import { InventoryService } from '@/services/InventoryService';
+import { ProductService } from '@/services/ProductService';
 
 @Component({
   name: "Inventory",
@@ -59,6 +63,7 @@ import { InventoryService } from '@/services/InventoryService';
 })
 export default class Inventory extends Vue {
   inventoryService = new InventoryService();
+  productService = new ProductService();
   isShowNewProductModal: boolean = false;
   isShowShipmentModal: boolean = false;
 
@@ -70,8 +75,15 @@ export default class Inventory extends Vue {
     await this.getInventoryInfo();
   }
 
-  addNewProduct(newProduct: IProduct) {
-    console.log(newProduct);
+  async addNewProduct(newProduct: IProduct) {
+    await this.productService.save(newProduct);
+    this.isShowNewProductModal = false;
+    await this.getInventoryInfo();
+  }
+
+  async archiveProduct(productId: number) {
+    await this.productService.archive(productId);
+    await this.getInventoryInfo();
   }
 
   async getInventoryInfo() {

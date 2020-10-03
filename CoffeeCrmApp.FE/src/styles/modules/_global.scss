@@ -4,6 +4,10 @@
 $coffee-color: #442d25;
 $menu-width: 320px;
 
+$green: rgb(39, 173, 27);
+$yellow: #c7a600;
+$red: rgb(192, 7, 7);
+
 * {
     box-sizing: border-box;
 }
@@ -68,4 +72,19 @@ body {
         background-color: $coffee-color;
         color: #fff;
     }
+}
+
+.green {
+    font-weight: bold;
+    color: $green;
+}
+
+.yellow {
+    font-weight: bold;
+    color: $yellow;
+}
+
+.red {
+    font-weight: bold;
+    color: $red;
 }
