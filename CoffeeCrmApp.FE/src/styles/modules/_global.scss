@@ -3,6 +3,7 @@
 
 $coffee-color: #442d25;
 $menu-width: 320px;
+$small-menu-width: 240px;
 
 $green: rgb(39, 173, 27);
 $yellow: #c7a600;
@@ -73,6 +74,30 @@ body {
         color: #fff;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .app {
+      &-content {
+        padding-left: 20px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .btn {
+        padding: 8px;
+        font-size: 14px;
+        letter-spacing: 1.5px;
+    }
+  }
+  
+  @media screen and (max-width: 410px) {
+    .btn {
+        padding: 5px;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+  }
 
 .green {
     font-weight: bold;

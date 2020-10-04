@@ -55,8 +55,8 @@ export default class Modal extends Vue {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
-  width: 640px;
-  margin-left: 80px;
+  width: 40%;
+  margin-left: 320px;
   border-radius: 3px;
 
   &-header {
@@ -81,7 +81,7 @@ export default class Modal extends Vue {
     border-top: 1px solid #eee;
     justify-content: center;
   }
-
+}
   .modal-fade-enter,
   .modal-fade-leave-active {
     opacity: 0;
@@ -92,10 +92,36 @@ export default class Modal extends Vue {
     transition: opacity 0.5s ease;
   }
 
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 900px) {
+    .modal {
+      margin-left: 240px;
+      width: 60%;
+    }
+}
+
+  @media screen and (max-width: 730px) {
     .modal {
       margin-left: 0;
+      width: 70%;
     }
   }
-}
+
+  @media screen and (max-width: 430px) {
+    .modal {
+      width: 80%;
+
+      &-header {
+        font-size: 0.8rem;
+      }
+
+      &-body {
+        padding: 1rem;
+      }
+
+      &-footer {
+        padding: 10px;
+      }
+    }
+  }
+  
 </style>

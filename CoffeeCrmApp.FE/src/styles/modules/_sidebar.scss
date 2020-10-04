@@ -320,8 +320,16 @@ body {
     transition: width 0s ease;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 900px) {
     .nav {
+        width: $small-menu-width;
+        min-width: $small-menu-width;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .nav {
+        width: $menu-width;
         left: -320px;
         opacity: 1;
     }

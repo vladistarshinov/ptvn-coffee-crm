@@ -1,7 +1,15 @@
 {
-  "dependencies": {
-    "bootstrap": "^4.5.2",
-    "bootstrap-vue": "^2.17.3",
-    "vue": "^2.6.12"
+  "name": "coffee-crm-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "server": "cd CoffeeCrmApp.WEB/ && dotnet run",
+    "client": "cd CoffeeCrmApp.FE/ && npm run serve",
+    "install_modules": "npm i && CoffeeCrmApp.FE/ && npm i",
+    "app": "npm-run-all --parallel server client"
+  },
+  "main": "App.vue",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }

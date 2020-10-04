@@ -31,15 +31,39 @@ export default class App extends Vue {}
   display: flex;
 
   &-content {
-    padding-left: $menu-width + 30px;
+    padding-left: $menu-width + 50px;
     width: 95%;
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 900px) {
+  .app {
+    &-content {
+      padding-left: $small-menu-width + 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 730px) {
   .app {
     &-content {
       padding-left: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .app {
+    &-content {
+      padding-left: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 410px) {
+   .app {
+    &-content {
+      padding-left: 10px;
     }
   }
 }
