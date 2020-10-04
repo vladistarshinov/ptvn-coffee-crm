@@ -22,6 +22,14 @@ namespace CoffeeCrmApp.WEB.Controllers
             _customerService = customerService;
         }
 
+        [HttpGet("/api/customers/{id}")]
+        public ActionResult GetCustomer(int id)
+        {
+            _logger.LogInformation("Получение клиента по Id");
+            var customer = _customerService.GetCustomerById(id);
+            return Ok(customer);
+        }
+
         [HttpGet("/api/customers")]
         public ActionResult GetCustomers()
         {
@@ -33,11 +41,12 @@ namespace CoffeeCrmApp.WEB.Controllers
                     Id = customer.Id,
                     FirstName = customer.FirstName,
                     LastName = customer.LastName,
+                    Phone = customer.Phone,
                     PrimaryAddress = CustomerMapper.CustomerAddressMapper(customer.PrimaryAddress),
                     CreatedOn = customer.CreatedOn,
                     UpdatedOn = customer.UpdatedOn
                 })
-                .OrderByDescending(customer => customer.CreatedOn)
+                .OrderBy(customer => customer.Id)
                 .ToList();
             return Ok(customersList);
         }
