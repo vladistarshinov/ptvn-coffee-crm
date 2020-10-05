@@ -50,6 +50,61 @@ namespace CoffeeCrmApp.BLL.Services
             }
         }
 
+        public ResponseService<Customer> UpdateCustomer(int id, Customer customer)
+        {
+       
+            var customerById = _db.Customers
+                .Include(customer => customer.PrimaryAddress)
+                .FirstOrDefault(x => x.Id == id);
+
+            if (customerById != null)
+            {
+                try
+                {
+                    customerById.Id = id;
+                    customerById.FirstName = customer.FirstName;
+                    customerById.LastName = customer.LastName;
+                    customerById.Phone = customer.Phone;
+                    customerById.CreatedOn = customer.CreatedOn;
+                    customerById.UpdatedOn = DateTime.UtcNow;
+                    customerById.PrimaryAddress.City = customer.PrimaryAddress.City;
+                    customerById.PrimaryAddress.Country = customer.PrimaryAddress.Country;
+                    customerById.PrimaryAddress.Address1 = customer.PrimaryAddress.Address1;
+                    customerById.PrimaryAddress.Address2 = customer.PrimaryAddress.Address2;
+                    customerById.PrimaryAddress.Email = customer.PrimaryAddress.Email;
+                    customerById.PrimaryAddress.UpdatedOn = DateTime.UtcNow;
+
+                    _db.SaveChanges();
+
+                    return new ResponseService<Customer>
+                    {
+                        IsSuccess = true,
+                        Data = customer,
+                        Message = "Пользователь изменен в системе",
+                        Time = DateTime.UtcNow
+                    };
+                }
+                catch(Exception e)
+                {
+                    return new ResponseService<Customer>
+                    {
+                        IsSuccess = false,
+                        Data = customer,
+                        Message = e.StackTrace, 
+                        Time = DateTime.UtcNow
+                    };
+                }
+            }
+
+            return new ResponseService<Customer>
+            {
+                IsSuccess = false,
+                Data = customer,
+                Message = "Пользователь не найден в системе", 
+                Time = DateTime.UtcNow
+            };
+        }
+
         /// <summary>
         /// Возвращает список всех покупателей, имеющихся в БД
         /// </summary>

@@ -35,7 +35,7 @@ namespace CoffeeCrmApp.WEB.Controllers
             return Ok(ordersList);  
         }
 
-        [HttpPost("/api/order")]
+        [HttpPost("/api/invoice")]
         public ActionResult GenerateNewOrder ([FromBody] InvoiceViewModel invoice)
         {
             if (!ModelState.IsValid) {

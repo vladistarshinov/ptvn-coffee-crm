@@ -25,15 +25,16 @@
       @close="isShowNewCustomerModal = false"
     />
 
-    <ShowCustomerInfo
-      v-if="isShowCustomerModal"
+    <EditCustomerModal
+      v-if="isShowEditCustomerModal"
       :customer="customer"
-      @close="isShowCustomerModal = false"
+      @edit:customer = "editCustomer"
+      @close="isShowEditCustomerModal = false"
     />
 
     <CustomerList
       :customers="customers"
-      @get:customer="getCustomer"
+      @show:customer="getCustomer"
       @delete="deleteCustomer"
     />
   </div>
@@ -44,16 +45,16 @@ import { Component, Vue } from "vue-property-decorator";
 import { ICustomer } from "@/types/Customer";
 import CustomerList from "@/components/CustomerList.vue";
 import NewCustomerModal from "@/components/NewCustomerModal.vue";
-import ShowCustomerInfo from "@/components/ShowCustomerInfo.vue";
+import EditCustomerModal from "@/components/EditCustomerModal.vue";
 import { CustomerService } from "@/services/CustomerService";
 @Component({
   name: "Customers",
-  components: { CustomerList, NewCustomerModal, ShowCustomerInfo }
+  components: { CustomerList, NewCustomerModal, EditCustomerModal }
 })
 export default class Customers extends Vue {
   customerService = new CustomerService();
   isShowNewCustomerModal: boolean = false;
-  isShowCustomerModal: boolean = false;
+  isShowEditCustomerModal: boolean = false;
 
   customers: ICustomer[] = [];
   customer: ICustomer = {
@@ -86,12 +87,18 @@ export default class Customers extends Vue {
         this.customer = this.customers[i];
       }
     }
-    this.isShowCustomerModal = true;
+    this.isShowEditCustomerModal = true;
   }
 
   async addNewCustomer(newCustomer: ICustomer) {
     await this.customerService.addCustomer(newCustomer);
     this.isShowNewCustomerModal = false;
+    await this.getCustomersData();
+  }
+
+  async editCustomer(customerId: number, customer: ICustomer) {
+    await this.customerService.editCustomer(customerId, customer);
+    this.isShowEditCustomerModal = false;
     await this.getCustomersData();
   }
 

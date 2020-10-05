@@ -10,6 +10,7 @@ namespace CoffeeCrmApp.BLL.Interfaces
         List<Customer> GetAllCustomers();
         DAL.Models.Customer GetCustomerById(int id);
         ResponseService<Customer> CreateCustomer(Customer customer);
+        ResponseService<Customer> UpdateCustomer(int id, Customer customer);
         ResponseService<bool> DeleteCustomer(int id);
     }
 }

@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th>Клиент</th>
-        <th>Город, адрес</th>
+        <th>Email</th>
         <th>Телефон</th>
         <th>Дата</th>
         <th>Удалить</th>
@@ -11,18 +11,10 @@
     </thead>
     <tbody>
       <tr v-for="item in customers" :key="item.id">
-        <td class="cursor-pointer" @click.prevent="getCustomer(item.id)">
+        <td class="cursor-pointer" @click.prevent="showEditCustomerInfoModal(item.id)">
           {{ item.firstName + " " + item.lastName }}
         </td>
-        <td>
-          {{
-            item.primaryAddress.city +
-              ", " +
-              item.primaryAddress.address1 +
-              "-" +
-              item.primaryAddress.address2
-          }}
-        </td>
+        <td>{{ item.primaryAddress.email }}</td>
         <td>{{ item.phone }}</td>
         <td>{{ item.createdOn | dataFilter }}</td>
         <td>
@@ -49,8 +41,8 @@ export default class CustomerList extends Vue {
   })
   customers!: ICustomer[];
 
-  getCustomer(customerId: number) {
-    this.$emit("get:customer", customerId);
+  showEditCustomerInfoModal(customerId: number) {
+    this.$emit("show:customer", customerId);
     console.log(customerId);
   }
 

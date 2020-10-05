@@ -64,6 +64,13 @@
       </ul>
     </template>
     <template v-slot:footer>
+      <button
+        class="btn"
+        type="button"
+        @click.prevent="editCustomerInfo(customer.id)"
+      >
+        Обновить
+      </button>
       <button class="btn" type="button" @click.prevent="close">
         Закрыть
       </button>
@@ -76,15 +83,37 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import Modal from "@/components/layouts/Modal.vue";
 import { ICustomer } from "@/types/Customer";
 @Component({
-  name: "ShowCustomerModal",
+  name: "EditCustomerModal",
   components: { Modal }
 })
-export default class ShowCustomerModal extends Vue {
+export default class EditCustomerModal extends Vue {
   @Prop({
     required: true,
     type: Object as () => ICustomer
   })
   customer!: ICustomer;
+
+  editCustomerInfo(customerId: number) {
+    const editCustomer: ICustomer = {
+      id: customerId,
+      firstName: this.customer.firstName,
+      lastName: this.customer.lastName,
+      phone: this.customer.phone,
+      primaryAddress: {
+        id: this.customer.primaryAddress.id,
+        country: this.customer.primaryAddress.country,
+        city: this.customer.primaryAddress.city,
+        email: this.customer.primaryAddress.email,
+        address1: this.customer.primaryAddress.address1,
+        address2: this.customer.primaryAddress.address2,
+        createdOn: this.customer.primaryAddress.createdOn,
+        updatedOn: new Date()
+      },
+      createdOn: this.customer.createdOn,
+      updatedOn: new Date()
+    };
+    this.$emit("edit:customer", editCustomer.id, editCustomer);
+  }
 
   close() {
     this.$emit("close");
@@ -92,31 +121,4 @@ export default class ShowCustomerModal extends Vue {
 }
 </script>
 
-<style lang="scss">
-.showCustomer {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  label {
-    font-weight: bold;
-    margin: 0.1rem;
-    display: flex;
-  }
-
-  input {
-    width: 95%;
-    height: 1.6rem;
-    margin: 0.7rem;
-    font-size: 1.1rem;
-    line-height: 1.3rem;
-    padding: 0.2rem;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    color: #444;
-  }
-}
-</style>
+<style lang="scss"></style>

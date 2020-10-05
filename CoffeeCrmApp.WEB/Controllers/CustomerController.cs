@@ -51,6 +51,21 @@ namespace CoffeeCrmApp.WEB.Controllers
             return Ok(customersList);
         }
 
+        [HttpPut("/api/customer/{id}")]
+        public ActionResult UpdateCustomer(int id, [FromBody] CustomerViewModel customer)
+        {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+            _logger.LogInformation("Изменение данных о клиенте");
+
+            customer.UpdatedOn = DateTime.UtcNow;
+
+            var customerData = CustomerMapper.SerializeCustomerViewModel(customer);
+            var editCustomer = _customerService.UpdateCustomer(id, customerData);
+            return Ok(editCustomer);
+        }
+
         [HttpPost("/api/customer")]
         public ActionResult CreateNewCustomer([FromBody] CustomerViewModel customer)
         {

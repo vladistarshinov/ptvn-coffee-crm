@@ -51,12 +51,11 @@ import { IProduct, IProductInventory } from "@/types/Product";
   components: { Modal }
 })
 export default class NewProductModal extends Vue {
-  @Prop({ 
-    required: true, 
-    type: Array as () => IProductInventory[] 
+  @Prop({
+    required: true,
+    type: Array as () => IProductInventory[]
   })
   inventory!: IProductInventory[];
-
   newProduct: IProduct = {
     id: 0,
     name: "",

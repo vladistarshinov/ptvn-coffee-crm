@@ -116,31 +116,4 @@ export default class NewCustomerModal extends Vue {
 }
 </script>
 
-<style lang="scss">
-.newCustomer {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  label {
-    font-weight: bold;
-    margin: 0.1rem;
-    display: flex;
-  }
-
-  input {
-    width: 95%;
-    height: 1.6rem;
-    margin: 0.7rem;
-    font-size: 1.1rem;
-    line-height: 1.3rem;
-    padding: 0.2rem;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    color: #444;
-  }
-}
-</style>
+<style lang="scss"></style>
