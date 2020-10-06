@@ -11,8 +11,14 @@
     </thead>
     <tbody>
       <tr v-for="item in customers" :key="item.id">
-        <td class="cursor-pointer" @click.prevent="showEditCustomerInfoModal(item.id)">
-          {{ item.firstName + " " + item.lastName }}
+        <td
+          class="cursor-pointer"
+          @mouseenter="activeEdit = true"
+          @mouseleave="activeEdit = false"
+          @click.prevent="showEditCustomerInfoModal(item.id)"
+        >
+          <span v-show="activeEdit" class="lni lni-pencil"></span
+          >{{ item.firstName + " " + item.lastName }}
         </td>
         <td>{{ item.primaryAddress.email }}</td>
         <td>{{ item.phone }}</td>
@@ -40,6 +46,7 @@ export default class CustomerList extends Vue {
     type: Array as () => ICustomer[]
   })
   customers!: ICustomer[];
+  activeEdit: boolean = false;
 
   showEditCustomerInfoModal(customerId: number) {
     this.$emit("show:customer", customerId);

@@ -19,18 +19,25 @@ export class CustomerService {
     return result.data;
   }
 
-  public async addCustomer(newCustomer: ICustomer): Promise<IResponseService<ICustomer>> {
+  public async addCustomer(
+    newCustomer: ICustomer
+  ): Promise<IResponseService<ICustomer>> {
     //const result: any = await axios.get(`${this.API_URL}/customer/`);
     const result = await axios.post(
-      `https://localhost:5001/api/customer/`, newCustomer
+      `https://localhost:5001/api/customer/`,
+      newCustomer
     );
     return result.data;
   }
 
-  public async editCustomer(customerId: number, customer: ICustomer): Promise<IResponseService<ICustomer>> {
+  public async editCustomer(
+    customerId: number,
+    customer: ICustomer
+  ): Promise<IResponseService<ICustomer>> {
     //const result: any = await axios.get(`${this.API_URL}/customer/`);
     const result = await axios.put(
-      `https://localhost:5001/api/customer/${customerId}`, customer
+      `https://localhost:5001/api/customer/${customerId}`,
+      customer
     );
     return result.data;
   }

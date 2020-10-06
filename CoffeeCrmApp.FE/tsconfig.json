@@ -4,6 +4,8 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
+    // delete error Object is possibly 'undefined' (Invoices -> orderItem has value "undefined")
+    "strictNullChecks": false,
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
