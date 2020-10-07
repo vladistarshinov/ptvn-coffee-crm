@@ -1,7 +1,7 @@
 import moment from "moment";
 
-const DataFilter = (date: Date) => {
+const DateFilter = (date: Date) => {
   return moment(date).format("DD MM YYYY");
 };
 
-export default DataFilter;
+export default DateFilter;

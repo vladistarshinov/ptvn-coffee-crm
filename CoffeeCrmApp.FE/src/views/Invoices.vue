@@ -38,31 +38,41 @@
           min="0"
         />
       </div>
-      <div class="inventory-actions">
+      <div class="inventory-actions justify-center">
         <button
           class="btn"
           @click.prevent="addOrderItem"
           type="button"
           :disabled="!newOrderItem.product || !newOrderItem.quantity"
-        >
-          Добавить заказ
-        </button>
+        >Добавить заказ</button>
         <button
           class="btn"
           @click.prevent="finalOrder"
           type="button"
           :disabled="!orderItems.length"
-        >
-          Завершить
-        </button>
+        >Завершить</button>
       </div>
-
       <InvoiceList :orderItems="orderItems" />
-
     </div>
-    <div class="invoice-step" v-if="invoiceStep === 3"></div>
-    <hr />
-    <div class="inventory-actions">
+    <div class="invoice-step" v-if="invoiceStep === 3">
+      <h2>Этап 3: Подтверждение заказа</h2>
+      <div class="invoice-snapshot">
+        <OrderInvoiceSnapshot       
+          :customers="customers" 
+          :selectedCustomerId="selectedCustomerId"
+          :orderItems="orderItems"
+        />
+        <InvoiceList :orderItems="orderItems" />
+      </div>
+      <div class="justify-center">
+        <button 
+          class="btn"
+          @click.prevent="submitInvoice"
+          type="button"
+        >Подтвердить</button>
+      </div>
+    </div>
+    <div class="inventory-actions justify-center">
       <button
         class="btn lni lni-arrow-left"
         @click.prevent="previousStep"
@@ -93,9 +103,10 @@ import { InventoryService } from "@/services/InventoryService";
 import { InvoiceService } from "@/services/InvoiceService";
 import { CustomerService } from "@/services/CustomerService";
 import InvoiceList from "@/components/InvoiceList.vue"
+import OrderInvoiceSnapshot from "@/components/OrderInvoiceSnapshot.vue";
 @Component({
   name: "Invoices",
-  components: { InvoiceList }
+  components: { InvoiceList, OrderInvoiceSnapshot }
 })
 export default class Invoices extends Vue {
   inventoryService = new InventoryService();
@@ -126,16 +137,60 @@ export default class Invoices extends Vue {
     quantity: 0
   };
 
+  get canPushPrevBtn() {
+    return this.invoiceStep !== 1;
+  }
+
+  get canPushNextBtn() {
+    if (this.invoiceStep === 1) {
+      if (!this.selectedCustomerId) {
+        return false;
+      }
+      return true;
+    }
+    if (this.invoiceStep === 2) {
+      if (!this.orderItems.length) {
+        return false;
+      }
+      return true;
+    }
+    if (this.invoiceStep === 3) {
+      return false;
+    }
+    return false;
+  }
+
+    previousStep(): void {
+    if (this.invoiceStep == 1) {
+      return;
+    }
+    this.invoiceStep -= 1;
+  }
+
+  nextStep(): void {
+    if (this.invoiceStep == 3) {
+      return;
+    }
+    this.invoiceStep += 1;
+  }
+
+  resetOrder(): void {
+    this.invoice = {
+      customerId: 0,
+      orderItems: [],
+      createdOn: new Date(),
+      updatedOn: new Date()
+    };
+    this.orderItems.length = 0;
+    this.invoiceStep = 1;
+  }
+
   addOrderItem() {
     const addOrderItem: IOrderItem = {
       product: this.newOrderItem.product,
       quantity: Number(this.newOrderItem.quantity)
     };
-
-    console.log(addOrderItem);
     const existingItems = this.orderItems.map(item => item.product.id);
-    console.log(existingItems);
-
     if (existingItems.includes(addOrderItem.product.id)) {
       const orderItem = this.orderItems.find(
         item => item.product.id === addOrderItem.product.id
@@ -166,52 +221,14 @@ export default class Invoices extends Vue {
     this.invoiceStep = 3;
   }
 
-  get canPushPrevBtn() {
-    return this.invoiceStep !== 1;
-  }
-
-  get canPushNextBtn() {
-    if (this.invoiceStep === 1) {
-      if (!this.selectedCustomerId) {
-        return false;
-      }
-      return true;
-    }
-    if (this.invoiceStep === 2) {
-      if (!this.orderItems.length) {
-        return false;
-      }
-      return true;
-    }
-    if (this.invoiceStep === 3) {
-      return false;
-    }
-    return false;
-  }
-
-  previousStep(): void {
-    if (this.invoiceStep == 1) {
-      return;
-    }
-    this.invoiceStep -= 1;
-  }
-
-  nextStep(): void {
-    if (this.invoiceStep == 3) {
-      return;
-    }
-    this.invoiceStep += 1;
-  }
-
-  resetOrder(): void {
+  async submitInvoice(): Promise<void> {
     this.invoice = {
-      customerId: 0,
-      orderItems: [],
-      createdOn: new Date(),
+      customerId: this.selectedCustomerId,
+      orderItems: this.orderItems,
+      createdOn: new Date(), 
       updatedOn: new Date()
-    };
-    this.orderItems.length = 0;
-    this.invoiceStep = 1;
+    }
+    await this.invoiceService.createNewInvoice(this.invoice);
   }
 
   async getInvoiceData(): Promise<void> {
@@ -225,31 +242,4 @@ export default class Invoices extends Vue {
 }
 </script>
 
-<style lang="scss">
-.invoice-step__detail {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 1.2rem;
-
-  label {
-    font-weight: bold;
-    margin-left: 0.8rem;
-    display: flex;
-  }
-
-  select,
-  input {
-    width: 95%;
-    height: 2rem;
-    margin: 0.7rem;
-    font-size: 1.1rem;
-    line-height: 1.3rem;
-    padding: 0.2rem;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    color: #444;
-  }
-}
-</style>
+<style lang="scss"></style>

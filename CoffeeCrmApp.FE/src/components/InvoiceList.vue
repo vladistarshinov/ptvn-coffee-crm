@@ -5,11 +5,11 @@
     <table class="table">
       <thead>
         <tr>
-        <th>Товар</th>
-        <th>Описание</th>
-        <th>Кол.</th>
-        <th>Цена</th>
-        <th>Общая сумма</th>
+          <th>Товар</th>
+          <th>Описание</th>
+          <th>Кол.</th>
+          <th>Цена</th>
+          <th>Общая сумма</th>
         </tr>
       </thead>
     <tbody>
@@ -25,12 +25,18 @@
             {{ (orderItem.product.price * orderItem.quantity) | priceFilter }}
           </td>
         </tr>
+        <tr>
+          <th colspan="4"></th>
+          <th>Итого</th>
+        </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4" class="due">Баланс оплачивается при получении</td>
+          <td class="price-final">{{ runningTotal | priceFilter }}</td>
+        </tr>
+      </tfoot>
     </table>
-    <div class="invoice-order__runningTotal">
-      <h3>Итого:</h3>
-      <h3>{{ runningTotal | priceFilter }}</h3>
-    </div>
   </div>
 </template>
 
@@ -66,14 +72,14 @@ export default class CustomerList extends Vue {
     display: flex;
     justify-content: center;
   }
+}
 
-  &__runningTotal {
-    display: flex;
-    justify-content: flex-end;
-
-    h3 {
-      margin-right: 1rem;
-    }
-  }
+.price-final {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #326500;
+}
+.due {
+  font-weight: bold;
 }
 </style>

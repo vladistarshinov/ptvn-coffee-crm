@@ -123,3 +123,8 @@ body {
     font-weight: bold;
     color: $red;
 }
+
+.justify-center {
+    display: flex;
+    justify-content: center;
+}

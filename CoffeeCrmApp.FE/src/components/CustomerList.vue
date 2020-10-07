@@ -22,7 +22,7 @@
         </td>
         <td>{{ item.primaryAddress.email }}</td>
         <td>{{ item.phone }}</td>
-        <td>{{ item.createdOn | dataFilter }}</td>
+        <td>{{ item.createdOn | dateFilter }}</td>
         <td>
           <div
             class="lni lni-close product-archive"
