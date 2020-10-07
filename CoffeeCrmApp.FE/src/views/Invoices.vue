@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="article">
-      <h2>Счета</h2>
+      <h2>Создание заказа</h2>
       <img
         class="title-separator"
         src="../assets/title-separator.png"
@@ -57,36 +57,8 @@
         </button>
       </div>
 
-      <div class="invoice-order-list" v-if="orderItems.length">
-        <div class="runningTotal">
-          <h3>Ваш заказ</h3>
-          {{ runningTotal | priceFilter }}
-        </div>
-        <hr />
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Товар</th>
-              <th>Описание</th>
-              <th>Количество</th>
-              <th>Цена</th>
-              <th>Общая сумма</th>
-            </tr>
-          </thead>
-          <tr
-            v-for="orderItem in orderItems"
-            :key="`index_${orderItem.product.id}`"
-          >
-            <td>{{ orderItem.product.name }}</td>
-            <td>{{ orderItem.product.description }}</td>
-            <td>{{ orderItem.quantity }}</td>
-            <td>{{ orderItem.product.price }}</td>
-            <td>
-              {{ (orderItem.product.price * orderItem.quantity) | priceFilter }}
-            </td>
-          </tr>
-        </table>
-      </div>
+      <InvoiceList :orderItems="orderItems" />
+
     </div>
     <div class="invoice-step" v-if="invoiceStep === 3"></div>
     <hr />
@@ -98,12 +70,10 @@
         :disabled="!canPushPrevBtn"
       ></button>
       <button
-        class="btn lni lni-play"
+        class="btn lni lni-reload"
         @click.prevent="resetOrder"
         type="button"
-      >
-        Reset
-      </button>
+      ></button>
       <button
         class="btn lni lni-arrow-right"
         @click.prevent="nextStep"
@@ -122,8 +92,10 @@ import { IProductInventory } from "@/types/Product";
 import { InventoryService } from "@/services/InventoryService";
 import { InvoiceService } from "@/services/InvoiceService";
 import { CustomerService } from "@/services/CustomerService";
+import InvoiceList from "@/components/InvoiceList.vue"
 @Component({
-  name: "Invoices"
+  name: "Invoices",
+  components: { InvoiceList }
 })
 export default class Invoices extends Vue {
   inventoryService = new InventoryService();
@@ -153,13 +125,6 @@ export default class Invoices extends Vue {
     },
     quantity: 0
   };
-
-  get runningTotal() {
-    return this.orderItems.reduce(
-      (a, b) => a + b["product"]["price"] * b["quantity"],
-      0
-    );
-  }
 
   addOrderItem() {
     const addOrderItem: IOrderItem = {
@@ -213,7 +178,7 @@ export default class Invoices extends Vue {
       return true;
     }
     if (this.invoiceStep === 2) {
-      if (!this.newOrderItem.product || !this.newOrderItem.quantity) {
+      if (!this.orderItems.length) {
         return false;
       }
       return true;
