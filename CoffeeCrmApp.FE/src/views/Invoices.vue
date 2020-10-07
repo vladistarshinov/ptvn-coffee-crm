@@ -44,34 +44,37 @@
           @click.prevent="addOrderItem"
           type="button"
           :disabled="!newOrderItem.product || !newOrderItem.quantity"
-        >Добавить заказ</button>
+        >
+          Добавить заказ
+        </button>
         <button
           class="btn"
           @click.prevent="finalOrder"
           type="button"
           :disabled="!orderItems.length"
-        >Завершить</button>
+        >
+          Завершить
+        </button>
       </div>
       <InvoiceList :orderItems="orderItems" />
     </div>
     <div class="invoice-step" v-if="invoiceStep === 3">
       <h2>Этап 3: Подтверждение заказа</h2>
-      <div class="invoice-snapshot">
-        <OrderInvoiceSnapshot       
-          :customers="customers" 
+      <div class="invoice-snapshot" id="invoice" ref="invoice">
+        <OrderInvoiceSnapshot
+          :customers="customers"
           :selectedCustomerId="selectedCustomerId"
           :orderItems="orderItems"
         />
         <InvoiceList :orderItems="orderItems" />
       </div>
       <div class="justify-center">
-        <button 
-          class="btn"
-          @click.prevent="submitInvoice"
-          type="button"
-        >Подтвердить</button>
+        <button class="btn" @click.prevent="submitInvoice" type="button">
+          Подтвердить
+        </button>
       </div>
     </div>
+    <hr />
     <div class="inventory-actions justify-center">
       <button
         class="btn lni lni-arrow-left"
@@ -95,18 +98,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Element } from "vue-property-decorator";
 import { IInvoice, IOrderItem } from "@/types/Invoice";
 import { ICustomer } from "@/types/Customer";
 import { IProductInventory } from "@/types/Product";
 import { InventoryService } from "@/services/InventoryService";
 import { InvoiceService } from "@/services/InvoiceService";
 import { CustomerService } from "@/services/CustomerService";
-import InvoiceList from "@/components/InvoiceList.vue"
+import InvoiceList from "@/components/InvoiceList.vue";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import OrderInvoiceSnapshot from "@/components/OrderInvoiceSnapshot.vue";
 @Component({
   name: "Invoices",
-  components: { InvoiceList, OrderInvoiceSnapshot }
+  components: { InvoiceList, OrderInvoiceSnapshot },
 })
 export default class Invoices extends Vue {
   inventoryService = new InventoryService();
@@ -119,7 +124,7 @@ export default class Invoices extends Vue {
     customerId: 0,
     orderItems: [],
     createdOn: new Date(),
-    updatedOn: new Date()
+    updatedOn: new Date(),
   };
   customers: ICustomer[] = [];
   inventory: IProductInventory[] = [];
@@ -132,9 +137,9 @@ export default class Invoices extends Vue {
       isTaxable: false,
       isArchived: false,
       createdOn: new Date(),
-      updatedOn: new Date()
+      updatedOn: new Date(),
     },
-    quantity: 0
+    quantity: 0,
   };
 
   get canPushPrevBtn() {
@@ -160,7 +165,7 @@ export default class Invoices extends Vue {
     return false;
   }
 
-    previousStep(): void {
+  previousStep(): void {
     if (this.invoiceStep == 1) {
       return;
     }
@@ -179,7 +184,7 @@ export default class Invoices extends Vue {
       customerId: 0,
       orderItems: [],
       createdOn: new Date(),
-      updatedOn: new Date()
+      updatedOn: new Date(),
     };
     this.orderItems.length = 0;
     this.invoiceStep = 1;
@@ -188,12 +193,12 @@ export default class Invoices extends Vue {
   addOrderItem() {
     const addOrderItem: IOrderItem = {
       product: this.newOrderItem.product,
-      quantity: Number(this.newOrderItem.quantity)
+      quantity: Number(this.newOrderItem.quantity),
     };
-    const existingItems = this.orderItems.map(item => item.product.id);
+    const existingItems = this.orderItems.map((item) => item.product.id);
     if (existingItems.includes(addOrderItem.product.id)) {
       const orderItem = this.orderItems.find(
-        item => item.product.id === addOrderItem.product.id
+        (item) => item.product.id === addOrderItem.product.id
       );
       let currentQuantity = Number(orderItem.quantity);
       const updatedQuantity = (currentQuantity += addOrderItem.quantity);
@@ -211,9 +216,9 @@ export default class Invoices extends Vue {
         isTaxable: false,
         isArchived: false,
         createdOn: new Date(),
-        updatedOn: new Date()
+        updatedOn: new Date(),
       },
-      quantity: 0
+      quantity: 0,
     };
   }
 
@@ -225,10 +230,25 @@ export default class Invoices extends Vue {
     this.invoice = {
       customerId: this.selectedCustomerId,
       orderItems: this.orderItems,
-      createdOn: new Date(), 
-      updatedOn: new Date()
-    }
+      createdOn: new Date(),
+      updatedOn: new Date(),
+    };
     await this.invoiceService.createNewInvoice(this.invoice);
+    this.downloadPdf();
+    await this.$router.push("/order");
+  }
+
+  downloadPdf() {
+    const pdf = new jsPDF("p", "pt", "a4", true);
+    const invoice = document.getElementById("invoice");
+    const width = this.$refs.invoice.clientWidth;
+    const height = this.$refs.invoice.clientHeight;
+
+    html2canvas(invoice).then(canvas => {
+      const image = canvas.toDataURL("image/png");
+      pdf.addImage(image, "PNG", 0, 0, width * 0.75, height * 0.75);
+      pdf.save("invoice");
+    });
   }
 
   async getInvoiceData(): Promise<void> {

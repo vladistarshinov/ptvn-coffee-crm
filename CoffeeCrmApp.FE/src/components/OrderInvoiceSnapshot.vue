@@ -1,20 +1,20 @@
 <template>
-  <div class="invoice-step-detail" id="invoice" ref="invoice">
+  <div class="invoice-step-detail">
     <div class="invoice-logo">
       <img id="imgLogo" src="../assets/logo-snapshot.png" alt="Corretto logo" />
-      <h3>г. Томск, пр. Ленина, 25, офис 221</h3>
+      <h5>г. Томск, пр. Ленина, 25, офис 221</h5>
       <img
         class="title-separator"
         src="../assets/title-separator.png"
         alt="Разделитель"
       />
-      <h3>Мы благодарим Вас за выбор нашей компании!</h3>
+      <h4>Мы благодарим Вас за выбор нашей компании!</h4>
       <div class="invoice-order" v-if="orderItems.length">
         <div class="invoice-order__header">
-          <h3>Дата и время заказа: {{ new Date() | datetimeFilter }}</h3>
-          <h3>Клиент: {{ this.selectedCustomer.firstName + " " + this.selectedCustomer.lastName }} </h3>
-          <h3>Email: {{ this.selectedCustomer.primaryAddress.email }}</h3>
-          <h3>Адрес: 
+          <h4>Дата и время заказа: {{ new Date() | datetimeFilter }}</h4>
+          <h4>Клиент: {{ this.selectedCustomer.firstName + " " + this.selectedCustomer.lastName }} </h4>
+          <h4>Email: {{ this.selectedCustomer.primaryAddress.email }}</h4>
+          <h4>Адрес: 
             {{ "г. " + 
                 this.selectedCustomer.primaryAddress.city +
                 ", " +  
@@ -22,7 +22,7 @@
                 "-" + 
                 this.selectedCustomer.primaryAddress.address2 
             }} 
-            </h3>
+          </h4>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@ export default class OrderInvoiceSnapshot extends Vue {
   }
 
   created() {
-      console.log(this.selectedCustomerId)
+    console.log(this.selectedCustomerId)
       
   }
 }
@@ -65,24 +65,22 @@ export default class OrderInvoiceSnapshot extends Vue {
 
 <style lang="scss">
 .invoice-step-detail {
-  margin: 1.2rem;
+  margin: 0.5rem;
 }
-
 .invoice {
-    &-logo {
-        padding-top: 1.4rem;
-        text-align: center;
-        img {
-            width: 220px;
-        }
+  &-logo {
+    padding-top: 0.6rem;
+    text-align: center;
+    img {
+      width: 180px;
     }
-    &-order {
-        margin-top: 1.2rem;
-        padding: 0.8rem;
-        &__header {
-            width: 100%;
-            margin-bottom: 1.2rem;
-        }   
-    }
+}
+  &-order {
+    margin-top: 0.4rem;
+    padding: 0.4rem;
+    &__header {
+      width: 100%;
+    }   
+  }
 }
 </style>

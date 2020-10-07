@@ -1,6 +1,5 @@
 <template>
   <div class="invoice-order" v-if="orderItems.length">
-    <hr />
     <h2 class="invoice-order__title">Заказ</h2>
     <table class="table">
       <thead>
@@ -65,8 +64,8 @@ export default class CustomerList extends Vue {
 
 <style lang="scss">
 .invoice-order {
-  margin-top: 1.3rem;
-  padding: 0.7rem;
+  margin-top: 0.6rem;
+  padding: 0.5rem;
 
   &__title {
     display: flex;
@@ -76,7 +75,7 @@ export default class CustomerList extends Vue {
 
 .price-final {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 0.7rem;
   color: #326500;
 }
 .due {
