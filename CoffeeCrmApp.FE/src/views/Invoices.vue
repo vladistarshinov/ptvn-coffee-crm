@@ -98,7 +98,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Element } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import { IInvoice, IOrderItem } from "@/types/Invoice";
 import { ICustomer } from "@/types/Customer";
 import { IProductInventory } from "@/types/Product";
@@ -111,7 +111,7 @@ import html2canvas from "html2canvas";
 import OrderInvoiceSnapshot from "@/components/OrderInvoiceSnapshot.vue";
 @Component({
   name: "Invoices",
-  components: { InvoiceList, OrderInvoiceSnapshot },
+  components: { InvoiceList, OrderInvoiceSnapshot }
 })
 export default class Invoices extends Vue {
   inventoryService = new InventoryService();
@@ -124,7 +124,7 @@ export default class Invoices extends Vue {
     customerId: 0,
     orderItems: [],
     createdOn: new Date(),
-    updatedOn: new Date(),
+    updatedOn: new Date()
   };
   customers: ICustomer[] = [];
   inventory: IProductInventory[] = [];
@@ -137,9 +137,9 @@ export default class Invoices extends Vue {
       isTaxable: false,
       isArchived: false,
       createdOn: new Date(),
-      updatedOn: new Date(),
+      updatedOn: new Date()
     },
-    quantity: 0,
+    quantity: 0
   };
 
   get canPushPrevBtn() {
@@ -184,7 +184,7 @@ export default class Invoices extends Vue {
       customerId: 0,
       orderItems: [],
       createdOn: new Date(),
-      updatedOn: new Date(),
+      updatedOn: new Date()
     };
     this.orderItems.length = 0;
     this.invoiceStep = 1;
@@ -193,12 +193,12 @@ export default class Invoices extends Vue {
   addOrderItem() {
     const addOrderItem: IOrderItem = {
       product: this.newOrderItem.product,
-      quantity: Number(this.newOrderItem.quantity),
+      quantity: Number(this.newOrderItem.quantity)
     };
-    const existingItems = this.orderItems.map((item) => item.product.id);
+    const existingItems = this.orderItems.map(item => item.product.id);
     if (existingItems.includes(addOrderItem.product.id)) {
       const orderItem = this.orderItems.find(
-        (item) => item.product.id === addOrderItem.product.id
+        item => item.product.id === addOrderItem.product.id
       );
       let currentQuantity = Number(orderItem.quantity);
       const updatedQuantity = (currentQuantity += addOrderItem.quantity);
@@ -216,9 +216,9 @@ export default class Invoices extends Vue {
         isTaxable: false,
         isArchived: false,
         createdOn: new Date(),
-        updatedOn: new Date(),
+        updatedOn: new Date()
       },
-      quantity: 0,
+      quantity: 0
     };
   }
 
@@ -231,7 +231,7 @@ export default class Invoices extends Vue {
       customerId: this.selectedCustomerId,
       orderItems: this.orderItems,
       createdOn: new Date(),
-      updatedOn: new Date(),
+      updatedOn: new Date()
     };
     await this.invoiceService.createNewInvoice(this.invoice);
     this.downloadPdf();
@@ -241,12 +241,21 @@ export default class Invoices extends Vue {
   downloadPdf() {
     const pdf = new jsPDF("p", "pt", "a4", true);
     const invoice = document.getElementById("invoice");
-    const width = this.$refs.invoice.clientWidth;
-    const height = this.$refs.invoice.clientHeight;
+    const width = (this.$refs.invoice as Vue & { clientWidth: () => number })
+      .clientWidth;
+    const height = (this.$refs.invoice as Vue & { clientHeight: () => number })
+      .clientHeight;
 
     html2canvas(invoice).then(canvas => {
       const image = canvas.toDataURL("image/png");
-      pdf.addImage(image, "PNG", 0, 0, width * 0.75, height * 0.75);
+      pdf.addImage(
+        image,
+        "PNG",
+        0,
+        0,
+        Number(width) * 0.75,
+        Number(height) * 0.75
+      );
       pdf.save("invoice");
     });
   }

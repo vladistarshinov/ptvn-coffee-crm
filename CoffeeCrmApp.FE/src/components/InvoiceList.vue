@@ -75,7 +75,7 @@ export default class CustomerList extends Vue {
 
 .price-final {
   font-weight: bold;
-  font-size: 0.7rem;
+  font-size: 1.1rem;
   color: #326500;
 }
 .due {
