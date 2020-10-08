@@ -11,7 +11,7 @@
           <th>Общая сумма</th>
         </tr>
       </thead>
-    <tbody>
+      <tbody>
         <tr
           v-for="orderItem in orderItems"
           :key="`index_${orderItem.product.id}`"
@@ -58,7 +58,6 @@ export default class CustomerList extends Vue {
       0
     );
   }
-
 }
 </script>
 
@@ -75,7 +74,7 @@ export default class CustomerList extends Vue {
 
 .price-final {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #326500;
 }
 .due {
