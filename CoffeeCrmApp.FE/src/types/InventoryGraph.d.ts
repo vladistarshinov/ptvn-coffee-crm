@@ -4,6 +4,6 @@ export interface IInventoryTimeline {
 }
 
 export interface ISnapshot {
-    productId: number;
+    productName: string;
     quantityOnHand: number[];
 }

@@ -119,7 +119,7 @@ namespace CoffeeCrmApp.BLL.Services
         /// <returns>List<ProductInventorySnapshot></returns>
         public List<ProductInventorySnapshot> GetSnapshotsHistory()
         {
-            var valueOfLastTime = DateTime.UtcNow - TimeSpan.FromHours(6);
+            var valueOfLastTime = DateTime.UtcNow - TimeSpan.FromHours(24);
             return _db.ProductInventorySnapshots
                 .Include(s => s.Product)
                 .Where(s =>

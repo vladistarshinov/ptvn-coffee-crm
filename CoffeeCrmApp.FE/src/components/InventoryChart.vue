@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isTimelineBuilt">
     <apexchart
       type="area"
       width="100%"

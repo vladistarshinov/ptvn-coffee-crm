@@ -46,7 +46,7 @@ export default class OrderInvoiceSnapshot extends Vue {
     required: true
   })
   readonly selectedCustomerId!: number;
-    @Prop({
+  @Prop({
     required: true,
     type: Array as () => IOrderItem[]
   })
