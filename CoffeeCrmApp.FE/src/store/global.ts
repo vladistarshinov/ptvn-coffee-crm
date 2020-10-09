@@ -5,7 +5,7 @@ import { InventoryService } from '@/services/InventoryService';
 
 class GlobalStore {
     snapshotTimeline: IInventoryTimeline = {
-        productInventorySnapshots: [],
+        inventorySnapshots: [],
         timeline: []
     };
 
@@ -17,12 +17,12 @@ const state = new GlobalStore();
 const mutations = make.mutations(state);
 
 const actions = {
-    async assignSnapshots({ commit }) {
+    async assignSnapshots({ commit } : { commit: any }) {
         const inventoryService = new InventoryService();
         const res = await inventoryService.getSnapshotHistory();
 
         const timeline: IInventoryTimeline = {
-            productInventorySnapshots: res.productInventorySnapshots,
+            inventorySnapshots: res.inventorySnapshots,
             timeline: res.timeline
         };
 

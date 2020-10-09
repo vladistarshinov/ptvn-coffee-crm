@@ -57,7 +57,7 @@ namespace CoffeeCrmApp.WEB.Controllers
             return Ok(inventory);
         }
 
-        [HttpGet("/api/inventory/shapshots")]
+        [HttpGet("/api/inventory/snapshots")]
         public ActionResult getSnapshotHistory() 
         {
             _logger.LogInformation("Получение истории поставок");
@@ -73,10 +73,10 @@ namespace CoffeeCrmApp.WEB.Controllers
                 var snapshots = snapshotHistory
                     .GroupBy(hist => hist.Product, hist => hist.QuantityOnHand,
                         (key, g) => new InventorySnapshotViewModel {
-                            ProductId = key.Id,
+                            ProductName = key.Name,
                             QuantityOnHand = g.ToList()
                         })
-                    .OrderBy(hist => hist.ProductId)
+                    .OrderBy(hist => hist.ProductName)
                     .ToList();
 
                 var snapshotsModel = new SnapshotResponse

@@ -7,7 +7,7 @@ namespace CoffeeCrmApp.WEB.ViewModels
 {
     public class InventorySnapshotViewModel
     {
-        public int ProductId { get; set; }
+        public string ProductName { get; set; }
         public List<int> QuantityOnHand { get; set; }
     }
 

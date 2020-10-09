@@ -1,5 +1,5 @@
 export interface IInventoryTimeline {
-    productInventorySnapshots: ISnapshot[];
+    inventorySnapshots: ISnapshot[];
     timeline: Date[];
 }
 

@@ -9,6 +9,8 @@
       />
     </div>
 
+    <InventoryChart v-show="isShowinventoryChart" />
+
     <div class="inventory-actions">
       <button
         class="btn"
@@ -23,6 +25,22 @@
         type="button"
       >
         Получить
+      </button>
+      <button
+        v-if="!isShowinventoryChart"
+        class="btn"
+        @click.prevent="isShowinventoryChart = true"
+        type="button"
+      >
+        Показать график
+      </button>
+      <button
+        v-else
+        class="btn"
+        @click.prevent="isShowinventoryChart = false"
+        type="button"
+      >
+        Скрыть график
       </button>
     </div>
 
@@ -54,18 +72,20 @@ import { IShipment } from "@/types/Shipment";
 import NewProductModal from "@/components/NewProductModal.vue";
 import ShipmentModal from "@/components/ShipmentModal.vue";
 import InventoryList from "@/components/InventoryList.vue";
+import InventoryChart from "@/components/InventoryChart.vue";
 import { InventoryService } from "@/services/InventoryService";
 import { ProductService } from "@/services/ProductService";
 
 @Component({
   name: "Inventory",
-  components: { ShipmentModal, NewProductModal, InventoryList }
+  components: { ShipmentModal, NewProductModal, InventoryList, InventoryChart }
 })
 export default class Inventory extends Vue {
   inventoryService = new InventoryService();
   productService = new ProductService();
   isShowNewProductModal: boolean = false;
   isShowShipmentModal: boolean = false;
+  isShowinventoryChart: boolean = false;
 
   inventory: IProductInventory[] = [];
 

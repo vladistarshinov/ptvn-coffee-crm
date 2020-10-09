@@ -7,12 +7,14 @@ import store from "./store";
 import PriceFilter from "@/filters/PriceFilter";
 import DateFilter from "@/filters/DateFilter";
 import DateTimeFilter from "@/filters/DateTimeFilter";
+import VueApexChart from "vue-apexcharts";
 
 Vue.config.productionTip = false;
 
 Vue.filter("priceFilter", PriceFilter);
 Vue.filter("dateFilter", DateFilter);
 Vue.filter("datetimeFilter", DateTimeFilter);
+Vue.component("apexchart", VueApexChart);
 /* Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(AlertPlugin);

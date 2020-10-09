@@ -10,9 +10,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   ...global,
-  state: {},
-  mutations: {},
-  actions: {},
   modules: {},
   plugins: [pathify.plugin]
 });
