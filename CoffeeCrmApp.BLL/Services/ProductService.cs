@@ -38,6 +38,16 @@ namespace CoffeeCrmApp.BLL.Services
         }
 
         /// <summary>
+        /// Получить инвентарь товара по Id из БД
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ProductInventory GetProductInventoryById(int id)
+        {
+            return _db.ProductInventories.Find(id);
+        }
+
+        /// <summary>
         /// Создать новый товар в БД
         /// </summary>
         /// <param name="product"></param>

@@ -29,12 +29,12 @@
           <th>Итого</th>
         </tr>
       </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="4" class="due">Баланс оплачивается при получении</td>
-          <td class="price-final">{{ runningTotal | priceFilter }}</td>
-        </tr>
-      </tfoot>
+        <tfoot>
+          <tr>
+            <td colspan="4" class="due">Баланс оплачивается при получении</td>
+            <td class="price-final">{{ runningTotal | priceFilter }}</td>
+          </tr>
+        </tfoot>
     </table>
   </div>
 </template>
@@ -58,6 +58,7 @@ export default class CustomerList extends Vue {
       0
     );
   }
+
 }
 </script>
 

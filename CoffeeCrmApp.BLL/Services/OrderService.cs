@@ -59,7 +59,7 @@ namespace CoffeeCrmApp.BLL.Services
                 item.Product = _productService
                     .GetProductById(item.Product.Id);
 
-                item.Quantity = item.Quantity;
+                // item.Quantity = item.Quantity;
 
                 var inventoryId = _inventoryService
                     .GetProductById(item.Product.Id).Id;

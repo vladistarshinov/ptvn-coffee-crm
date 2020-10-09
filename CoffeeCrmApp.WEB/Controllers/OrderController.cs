@@ -49,7 +49,7 @@ namespace CoffeeCrmApp.WEB.Controllers
         }
 
         [HttpPatch("/api/order/complete/{id}")]
-        public ActionResult GetCompleteOrder(int id)
+        public ActionResult MarkCompleteOrder(int id)
         {
             _logger.LogInformation($"Cтатус заказа {id} - оплачено");
             _orderService.SuccessOrderStatus(id);

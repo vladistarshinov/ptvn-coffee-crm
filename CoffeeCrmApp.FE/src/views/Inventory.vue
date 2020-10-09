@@ -54,8 +54,8 @@ import { IShipment } from "@/types/Shipment";
 import NewProductModal from "@/components/NewProductModal.vue";
 import ShipmentModal from "@/components/ShipmentModal.vue";
 import InventoryList from "@/components/InventoryList.vue";
-import { InventoryService } from '@/services/InventoryService';
-import { ProductService } from '@/services/ProductService';
+import { InventoryService } from "@/services/InventoryService";
+import { ProductService } from "@/services/ProductService";
 
 @Component({
   name: "Inventory",

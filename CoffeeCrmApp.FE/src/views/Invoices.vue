@@ -37,6 +37,7 @@
           type="number"
           min="0"
         />
+        <h4 id="invoice-step__error"></h4>
       </div>
       <div class="inventory-actions justify-center">
         <button
@@ -195,6 +196,10 @@ export default class Invoices extends Vue {
       product: this.newOrderItem.product,
       quantity: Number(this.newOrderItem.quantity)
     };
+    const existingProduct = this.inventory.find(
+      item => item.product.id === addOrderItem.product.id
+    );
+    console.log(existingProduct.quantityOnHand);
     const existingItems = this.orderItems.map(item => item.product.id);
     if (existingItems.includes(addOrderItem.product.id)) {
       const orderItem = this.orderItems.find(
@@ -203,9 +208,24 @@ export default class Invoices extends Vue {
       let currentQuantity = Number(orderItem.quantity);
       const updatedQuantity = (currentQuantity += addOrderItem.quantity);
       orderItem.quantity = updatedQuantity;
-    } else {
+    } else if (existingProduct.quantityOnHand > 0 && existingProduct.quantityOnHand >= this.newOrderItem.quantity) {
       this.orderItems.push(this.newOrderItem);
-      console.log(this.orderItems);
+    } else if (existingProduct.quantityOnHand > 0 && existingProduct.quantityOnHand < this.newOrderItem.quantity) {
+      const textError = document.getElementById('invoice-step__error');
+      textError.style.display="block";
+      textError.innerHTML = `Данный товар имеется в наличии в количестве ${existingProduct.quantityOnHand} штук`;
+      textError.style.color="red";
+      setInterval(() => {
+        textError.style.display="none";
+      }, 3000);
+    } else {
+      const textError = document.getElementById('invoice-step__error');
+      textError.style.display="block";
+      textError.innerHTML = "Извините, но товара нет в наличии";
+      textError.style.color="red";
+      setInterval(() => {
+        textError.style.display="none";
+      }, 3000);
     }
     this.newOrderItem = {
       product: {

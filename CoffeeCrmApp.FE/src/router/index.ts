@@ -22,10 +22,16 @@ const routes: Array<RouteConfig> = [
       import(/* webpackChunkName: "customers" */ "../views/Customers.vue")
   },
   {
-    path: "/invoice",
+    path: "/invoice/new",
     name: "Invoices",
     component: () =>
       import(/* webpackChunkName: "invoice" */ "../views/Invoices.vue")
+  },
+  {
+    path: "/orders",
+    name: "Orders",
+    component: () =>
+      import(/* webpackChunkName: "orders" */ "../views/Orders.vue")
   }
 ];
 
