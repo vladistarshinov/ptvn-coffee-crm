@@ -56,5 +56,42 @@ namespace CoffeeCrmApp.WEB.Controllers
             var inventory = _inventoryService.UpdateQuantities(id, settingQuantities);
             return Ok(inventory);
         }
+
+        [HttpGet("/api/inventory/shapshots")]
+        public ActionResult getSnapshotHistory() 
+        {
+            _logger.LogInformation("Получение истории поставок");
+
+            try {
+                var snapshotHistory = _inventoryService.GetSnapshotsHistory();
+
+                var timelineMarkers = snapshotHistory
+                    .Select(t => t.CreatedSnapshotOn)
+                    .Distinct()
+                    .ToList();
+
+                var snapshots = snapshotHistory
+                    .GroupBy(hist => hist.Product, hist => hist.QuantityOnHand,
+                        (key, g) => new InventorySnapshotViewModel {
+                            ProductId = key.Id,
+                            QuantityOnHand = g.ToList()
+                        })
+                    .OrderBy(hist => hist.ProductId)
+                    .ToList();
+
+                var snapshotsModel = new SnapshotResponse
+                {
+                    InventorySnapshots = snapshots,
+                    Timeline = timelineMarkers
+                };
+
+                return Ok(snapshotsModel); 
+
+            } catch (Exception e) {
+                _logger.LogError("Ошибка получения истории поставок");
+                _logger.LogError(e.StackTrace);
+                return BadRequest("Ошибка получения истории поставок");
+            }
+        }
     }
 }
